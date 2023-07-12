@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yaml Translate</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Yaml Translate</h1>
+    </header>
+
+    <main>
+        <section>
+            <h2>Bienvenue !</h2>
+            <form id="upload-form">
+                <select id="language-select">
+                    <option value="francais">Français</option>
+                    <option value="anglais">Anglais</option>
+                    <option value="espagnol">Espagnol</option>
+                    <option value="allemand">Allemand</option>
+                    <option value="italien">Italien</option>
+                    <option value="portugais">Portugais</option>
+                    <option value="russe">Russe</option>
+                    <option value="chinois">Chinois</option>
+                </select>
+                
+                <input type="text" id="code-input" placeholder="Ex: 54df5df4df-df84d1f4df-df1dfdf56df5" required>
+                <input type="file" name="fichier" id="fichier">
+                <input type="submit" value="Upload">
+            </form>
+        </section>
+
+        <section id="translation-section" style="display: none;">
+            <h2>Résultat de la traduction :</h2>
+            <div id="translation-result"></div>
+        </section>
+    
+        <section id="error-section" style="display: none;">
+            <h2>Erreur lors de la traduction :</h2>
+            <div id="error-message"></div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2023 By Kotlini. Tous droits réservés.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
