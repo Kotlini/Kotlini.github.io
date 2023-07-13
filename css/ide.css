@@ -1,0 +1,48 @@
+.nav-link {
+  position: relative;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  overflow: hidden;
+  transition: color 0.3s, background-color 0.3s;
+}
+
+.nav-link::before,
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: transparent;
+  transition: transform 0.3s, background-color 0.3s;
+  transform: scaleX(0);
+}
+
+.nav-link::before {
+  transform-origin: left;
+}
+
+.nav-link::after {
+  transform-origin: right;
+}
+
+.nav-link:hover {
+  color: #3B82F6;
+  background-color: rgba(59, 130, 246, 0.1);
+}
+
+.nav-link:hover::before,
+.nav-link:hover::after {
+  transform: scaleX(1);
+}
+
+.nav-link:hover::before {
+  background-color: #3B82F6;
+}
+
+.nav-link:hover::after {
+  background-color: rgba(59, 130, 246, 0.6);
+}

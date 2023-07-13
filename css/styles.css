@@ -1,0 +1,124 @@
+.nav-link {
+    position: relative;
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    overflow: hidden;
+    transition: color 0.3s, background-color 0.3s;
+  }
+  
+  .nav-link::before,
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: transparent;
+    transition: transform 0.3s, background-color 0.3s;
+    transform: scaleX(0);
+  }
+  
+  .nav-link::before {
+    transform-origin: left;
+  }
+  
+  .nav-link::after {
+    transform-origin: right;
+  }
+  
+  .nav-link:hover {
+    color: #3B82F6;
+    background-color: rgba(59, 130, 246, 0.1);
+  }
+  
+  .nav-link:hover::before,
+  .nav-link:hover::after {
+    transform: scaleX(1);
+  }
+  
+  .nav-link:hover::before {
+    background-color: #3B82F6;
+  }
+  
+  .nav-link:hover::after {
+    background-color: rgba(59, 130, 246, 0.6);
+  }
+
+  html, body {
+    height: 100%;
+  }
+
+  #app {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+
+  footer {
+    background-color: #2E3244;
+    color: #FFFFFF;
+    padding: 20px;
+    text-align: center;
+    font-size: 14px;
+    margin-top: auto;
+  }
+
+  .button-container {
+    padding-top: 15%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem 3rem;
+    font-size: 1.5rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: #FFFFFF;
+    background-color: #2563EB;
+    border: none;
+    border-radius: 9999px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+
+  .btn-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+  }
+
+  .btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem 3rem;
+    font-size: 1.5rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: #FFFFFF;
+    background-color: #2563EB;
+    border: none;
+    border-radius: 9999px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+
+  .btn i {
+    margin-right: 0.5rem;
+  }
+
+  .btn:hover {
+    background-color: #3B82F6;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }

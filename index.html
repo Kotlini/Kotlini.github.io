@@ -1,53 +1,41 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="YAML Translator">
-    <title>Yaml Translate</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Traducteur Yaml</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <link rel="stylesheet" href="css/styles.css">
 </head>
-<body>
-    <header>
-        <h1>Yaml Translate</h1>
+<body class="bg-gray-100">
+  <div id="app" class="flex flex-col min-h-screen">
+    <header class="flex justify-between items-center py-4 px-6 bg-blue-900">
+      <div class="text-white text-lg font-semibold">Traducteur Yaml</div>
+      <nav>
+        <ul class="flex space-x-4 text-white">
+          <li><a href="#" class="nav-link">Accueil</a></li>
+          <li><a href="translate.html" class="nav-link">Traduction</a></li>
+          <li><a href="ide.html" class="nav-link">Vérificateur</a></li>
+        </ul>
+      </nav>
     </header>
 
-    <main>
-        <section>
-            <h2>Bienvenue !</h2>
-            <form id="upload-form">
-                <select id="language-select">
-                    <option value="French">Français</option>
-                    <option value="English">Anglais</option>
-                    <option value="Spanish">Espagnol</option>
-                    <option value="German">Allemand</option>
-                    <option value="Italian">Italien</option>
-                    <option value="Portuguese">Portugais</option>
-                    <option value="Russian">Russe</option>
-                    <option value="Chinese">Chinois</option>
-                </select>
-                
-                <input type="text" id="code-input" placeholder="Veuillez insérer votre clé API OpenAI." required>
-                <input type="file" name="fichier" id="fichier">
-                <input type="submit" value="Upload">
-            </form>
-        </section>
+    <div class="flex flex-col justify-center items-center button-container">
+      <h1 class="text-4xl text-gray-900 mb-6">Dépêchez-vous d'y aller !</h1>
+      <div class="btn-container space-x-4">
+        <a href="translate.html" class="btn">
+          <i class="fas fa-language"></i> Traduction
+        </a>
+        <a href="ide.html" class="btn">
+          <i class="fas fa-check-circle"></i> Vérificateur
+        </a>
+      </div>
+    </div>
 
-        <section id="translation-section" style="display: none;">
-            <h2>Résultat de la traduction :</h2>
-            <div id="translation-result"></div>
-        </section>
-    
-        <section id="error-section" style="display: none;">
-            <h2>Erreur lors de la traduction :</h2>
-            <div id="error-message"></div>
-        </section>
-    </main>
-
-    <footer>
-        <p>&copy; 2023 By Kotlini. Tous droits réservés.</p>
+    <footer class="py-4 px-6 bg-blue-900 text-white">
+      <div class="text-center font-semibold">&copy; 2023 Yaml Translator. Tous droits réservés</div>
     </footer>
-
-    <script src="script.js"></script>
+  </div>
 </body>
 </html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Traducteur Yaml</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+  <link rel="stylesheet" href="css/ide.css">
+
+</head>
+<body class="bg-gray-100">
+  <div id="app" class="flex flex-col min-h-screen">
+    <header class="flex justify-between items-center py-4 px-6 bg-blue-900">
+      <div class="text-white text-lg font-semibold">Traducteur Yaml</div>
+      <nav>
+        <ul class="flex space-x-4 text-white">
+          <li><a href="index.html" class="nav-link">Accueil</a></li>
+          <li><a href="translate.html" class="nav-link">Traduction</a></li>
+          <li><a href="#" class="nav-link">Vérificateur</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main class="flex-grow">
+      <div class="container mx-auto px-4 py-10">
+        <h1 class="text-4xl text-gray-900 mb-6">Vérification du fichier YML</h1>
+        <div class="w-full">
+          <div id="editor" class="w-full h-96 border border-gray-300 rounded-lg"></div>
+        </div>
+        <button id="verifyBtn" class="mt-4 py-3 px-6 bg-blue-500 text-white hover:bg-blue-600 rounded-lg transition-colors duration-300">Vérifier</button>
+        <div id="errorContainer" class="mt-6"></div>
+      </div>
+    </main>
+
+    <footer class="py-4 px-6 bg-blue-900 text-white">
+      <div class="text-center font-semibold">&copy; 2023 Yaml Translator. Tous droits réservés</div>
+    </footer>
+  </div>
+
+  <div id="popup" class="popup hidden">
+    <h2 class="text-2xl mb-4">Fichier YML valide !</h2>
+    <button id="closePopupBtn" class="px-4 py-2 bg-blue-500 text-white hover:bg-blue-600 rounded-lg transition-colors duration-300">Fermer</button>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.12/ace.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.1.0/js-yaml.min.js"></script>
+  <script src="js/ide.js"></script>
+</body>
+</html>
