@@ -21,13 +21,12 @@ buttonDownload.addEventListener('click', () => {
 });
 
 form.addEventListener('submit', (event) => {
-
   handleFormSubmit(event);
 });
 
 function handleFormSubmit(event) {
   event.preventDefault();
-
+  
   const languageSelect = document.getElementById('lang-select');
   const selectedLanguage = languageSelect.value;
   const modelSelect = document.getElementById('model-select');
@@ -36,7 +35,7 @@ function handleFormSubmit(event) {
   const apiKey = codeInput.value;
   const fileInput = document.getElementById('file-input');
   const selectedFiles = fileInput.files;
-
+  
   if (selectedFiles.length > 0) {
     popupLoading.classList.remove('hidden');
     handleFileTranslation(apiKey, selectedLanguage, selectedModel, selectedFiles);
@@ -50,11 +49,12 @@ function handleFileTranslation(apiKey, language, model, files) {
       popupDownload.classList.remove('hidden');
       return;
     }
+    
     const file = files[index];
     readContentsOfFile(file, function (fileContents) {
       callChatGPTAPI(apiKey, fileContents, language, model, function (response, error) {
         if (error) {
-          const spanElement = document.querySelector('span[name="alert-message"]');         
+          const spanElement = document.querySelector('span[name="alert-message"]');
           popupLoading.classList.add('hidden');
           console.log('Erreur lors de l\'appel à l\'API ChatGPT :', error);
           spanElement.textContent = 'Erreur lors de l\'appel à l\'API ChatGPT: ' + error;
@@ -65,31 +65,33 @@ function handleFileTranslation(apiKey, language, model, files) {
             name: file.name,
             url: URL.createObjectURL(new Blob([response], { type: 'text/plain' })),
           });
-          const spanElement = document.querySelector('span[name="alert-message"]');         
+          
+          const spanElement = document.querySelector('span[name="alert-message"]');
           popupLoading.classList.add('hidden');
           spanElement.textContent = response;
-          popupAlert.classList.remove('hidden');        
+          popupAlert.classList.remove('hidden');
         }
+        
         translateFile(index + 1);
       });
     });
   }
-
+  
   translateFile(0);
 }
 
 function readContentsOfFile(file, callback) {
   const reader = new FileReader();
-
+  
   reader.onload = function (event) {
     const contents = event.target.result;
     callback(contents);
   };
-
+  
   reader.onerror = function (event) {
     console.error('Erreur de lecture du fichier :', event.target.error);
   };
-
+  
   reader.readAsText(file);
 }
 
@@ -101,30 +103,6 @@ async function callChatGPTAPI(apiKey, fileText, language, model, callback) {
         "Content-Type": "application/json",
         Authorization: `Bearer ${apiKey}`,
       },
-<<<<<<< HEAD
-      { role: 'user', content: fileText },
-    ],
-  };
-
-  fetch('https://api.openai.com/v1/chat/completions', {
-    method: 'POST',
-    headers: headers,
-    body: JSON.stringify(data),
-  })
-    .then(response => {
-      if (response.ok) {
-        return response.json();
-      } else {
-        throw new Error(`${response.statusText}`);
-      }
-    })
-    .then(data => {
-      const responseText = data.choices[0].message.content;
-      callback(responseText, null);
-    })
-    .catch(error => {
-      callback(null, `${error.message}`);
-=======
       body: JSON.stringify({
         model: model,
         messages: [
@@ -135,16 +113,16 @@ async function callChatGPTAPI(apiKey, fileText, language, model, callback) {
           { role: 'user', content: fileText },
         ],
       }),
->>>>>>> ba24c5a (Added error handling for fetch request and JSON parsing)
     });
-
+    
     console.log(response);
-
+    
     if (!response.ok) {
       throw new Error(`HTTP status: ${response.status}`);
     }
-
+    
     const data = await response.json();
+    
     if (data.choices && data.choices.length > 0) {
       callback(data.choices[0].message.content, null);
     } else {
@@ -155,7 +133,6 @@ async function callChatGPTAPI(apiKey, fileText, language, model, callback) {
     callback(null, `${error.message}`);
   }
 }
-
 
 function getFileExtension(filename) {
   return filename.split(".").pop();
