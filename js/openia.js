@@ -118,7 +118,7 @@ function callChatGPTAPI(apiKey, fileText, language, model, callback) {
       }
     })
     .then(data => {
-      const responseText = data.choices[0].text;
+      const responseText = data.choices[0].message.content;
       callback(responseText, null);
     })
     .catch(error => {
