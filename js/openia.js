@@ -1,3 +1,4 @@
+const API_URL = "https://api.openai.com/v1/chat/completions";
 const form = document.getElementById('upload-form');
 const popupLoading = document.getElementById('popup-loading-files');
 const popupDownload = document.getElementById('popup-dl-files');
@@ -64,6 +65,10 @@ function handleFileTranslation(apiKey, language, model, files) {
             name: file.name,
             url: URL.createObjectURL(new Blob([response], { type: 'text/plain' })),
           });
+          const spanElement = document.querySelector('span[name="alert-message"]');         
+          popupLoading.classList.add('hidden');
+          spanElement.textContent = response;
+          popupAlert.classList.remove('hidden');        
         }
         translateFile(index + 1);
       });
@@ -88,19 +93,15 @@ function readContentsOfFile(file, callback) {
   reader.readAsText(file);
 }
 
-function callChatGPTAPI(apiKey, fileText, language, model, callback) {
-  const headers = {
-    'Content-Type': 'application/json',
-    Authorization: `Bearer ${apiKey}`,
-  };
-
-  const data = {
-    model: model,
-    messages: [
-      {
-        role: 'system',
-        content: `You are an expert translator and proofreader specializing in YAML syntax and Minecraft color codes. Your task is to translate the provided YAML file while preserving the encoding, color codes, and most importantly, the YAML syntax. Please translate it into ${language} language.`,
+async function callChatGPTAPI(apiKey, fileText, language, model, callback) {
+  try {
+    const response = await fetch(API_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${apiKey}`,
       },
+<<<<<<< HEAD
       { role: 'user', content: fileText },
     ],
   };
@@ -123,8 +124,38 @@ function callChatGPTAPI(apiKey, fileText, language, model, callback) {
     })
     .catch(error => {
       callback(null, `${error.message}`);
+=======
+      body: JSON.stringify({
+        model: model,
+        messages: [
+          {
+            role: 'system',
+            content: `You are an expert translator and proofreader specializing in YAML syntax and Minecraft color codes. Your task is to translate the provided YAML file while preserving the encoding, color codes, and most importantly, the YAML syntax. Please translate it into ${language} language.`,
+          },
+          { role: 'user', content: fileText },
+        ],
+      }),
+>>>>>>> ba24c5a (Added error handling for fetch request and JSON parsing)
     });
+
+    console.log(response);
+
+    if (!response.ok) {
+      throw new Error(`HTTP status: ${response.status}`);
+    }
+
+    const data = await response.json();
+    if (data.choices && data.choices.length > 0) {
+      callback(data.choices[0].message.content, null);
+    } else {
+      throw new Error("Invalid response format: data.choices is undefined or empty.");
+    }
+  } catch (error) {
+    console.error("Error:", error);
+    callback(null, `${error.message}`);
+  }
 }
+
 
 function getFileExtension(filename) {
   return filename.split(".").pop();
